@@ -1,0 +1,15 @@
+langchain_community
+langchain
+loguru
+rich
+sentence-transformers==2.3.0
+unstructured
+unstructured[pdf]
+chromadb
+rank_bm25
+matplotlib
+jsonargparse
+langchain-openai
+pymupdf
+streamlit
+cohere
