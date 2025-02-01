@@ -82,19 +82,35 @@ def load_pdf(files="data/2306.02707.pdf"):
         files = [files]  # Ensure 'files' is always a list
 
     documents = []
+    
+    
+    
     for file_path in files:
+        
+        
         try:
-            # Open the PDF file
-            doc = fitz.open(file_path)
+            
             text = ""
-            # Extract text from each page
-            for page_num in range(len(doc)):
-                page = doc.load_page(page_num)
-                text += page.get_text("text")
 
-            # Apply post-processing steps
-            text = clean_extra_whitespace(text)
-            text = group_broken_paragraphs(text)
+            # if file_path.endswith(".txt"):
+            with open(file_path, 'r', encoding="utf-8") as f:
+                text = f.read()
+                print("i am here")
+
+            # else:
+                
+            # Open the PDF file
+            # print(file_path)
+            # doc = fitz.open(file_path)
+
+            # # Extract text from each page
+            # for page_num in range(len(doc)):
+            #     page = doc.load_page(page_num)
+            #     text += page.get_text("text")
+
+            # # Apply post-processing steps
+            # text = clean_extra_whitespace(text)
+            # text = group_broken_paragraphs(text)
 
             # Create a Document object
             document = Document(
@@ -222,7 +238,7 @@ def load_embedding_model(
 
             embedding_model = HuggingFaceBgeEmbeddings(
                 model_name=model_name,
-                model_kwargs=model_kwargs,
+                # model_kwargs=model_kwargs,
                 encode_kwargs=encode_kwargs,
             )
         return embedding_model
@@ -315,7 +331,7 @@ def create_parent_retriever(
     embeddings_model,
     collection_name="split_documents", 
     top_k=5,
-    persist_directory=None,
+    persist_directory='/data1/sunny/suraj/dump2/vectorstore/',
 ):
     
     """
